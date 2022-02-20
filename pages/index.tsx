@@ -1,9 +1,10 @@
-import styles from '../styles/Home.module.css'
+import toast from 'react-hot-toast';
+import { Loader } from '../components/Loader';
 
 export default function Home() {
   return (
-    <div className={styles.container}>
-      
+    <div>
+      <button onClick={() => toast.success('Hello Toast!')}>Toast me!</button>
     </div>
-  )
+  );
 }
