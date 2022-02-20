@@ -1,11 +1,10 @@
-import { FirebaseOptions } from '@firebase/app';
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
-import 'firebase/compat/storage';
+import { initializeApp, getApp, FirebaseOptions } from "firebase/app";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig: FirebaseOptions = {
-  apiKey: process.env.FIREBASE_API_KEY!,
+  apiKey: 'AIzaSyDdA0izl7IP1I1gIfwwUUTBL9uw8F7R0iI',
   authDomain: 'nextfire-c0103.firebaseapp.com',
   projectId: 'nextfire-c0103',
   storageBucket: 'nextfire-c0103.appspot.com',
@@ -14,12 +13,18 @@ const firebaseConfig: FirebaseOptions = {
   measurementId: 'G-L9DCJPXQSP',
 };
 
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
+function createFirebaseApp(config) {
+  try {
+    return getApp();
+  } catch {
+    return initializeApp(config);
+  }
 }
 
-export const auth = firebase.auth();
-export const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+const firebaseApp = createFirebaseApp(firebaseConfig);
 
-export const firestore = firebase.firestore();
-export const storage = firebase.storage();
+export const auth = getAuth(firebaseApp)
+export const googleAuthProvider = new GoogleAuthProvider();
+
+export const firestore = getFirestore(firebaseApp);
+export const storage = getStorage(firebaseApp);
