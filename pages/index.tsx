@@ -13,7 +13,8 @@ import { GetServerSideProps } from 'next';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { Loader } from '../components/Loader';
-import { Post, PostFeed } from '../components/Postfeed';
+import { Metatags } from '../components/Metatags';
+import { Post, PostFeed } from '../components/PostFeed';
 import { postToJson } from '../lib/firebase';
 
 const LIMIT = 1;
@@ -59,6 +60,7 @@ export default function Home(props: HomeProps) {
 
   return (
     <main>
+      <Metatags />
        <div className="card card-info">
         <h2>💡 Next.js + Firebase - The Full Course</h2>
         <p>Welcome! This app is built with Next.js and Firebase and is loosely inspired by Dev.to.</p>

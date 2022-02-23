@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
-import { Post } from './Postfeed';
+import { Post } from './PostFeed';
 
 interface PostContentProps {
   post: Post;

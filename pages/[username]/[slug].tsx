@@ -11,8 +11,9 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import Link from 'next/link';
 import { useContext } from 'react';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
+import { Metatags } from '../../components/Metatags';
 import { PostContent } from '../../components/PostContent';
-import { Post } from '../../components/Postfeed';
+import { Post } from '../../components/PostFeed';
 import { UserContext } from '../../lib/context';
 import { getUserWithUsername, postToJson } from '../../lib/firebase';
 
@@ -30,6 +31,8 @@ export default function PostPage(props: PostPageProps) {
 
   return (
     <main>
+      <Metatags title={post.title} description={`"${post.title}" written by ${user?.displayName || 'an awesome person'}!`}/>
+
       <section>
         <PostContent post={post} />
       </section>
