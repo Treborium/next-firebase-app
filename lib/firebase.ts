@@ -1,7 +1,16 @@
-import { initializeApp, getApp, FirebaseOptions } from "firebase/app";
-import { getAuth, GoogleAuthProvider } from "firebase/auth";
-import { collection, DocumentSnapshot, getDocs, getFirestore, limit, query, QueryDocumentSnapshot, where } from "firebase/firestore";
-import { getStorage } from "firebase/storage";
+import { initializeApp, getApp, FirebaseOptions } from 'firebase/app';
+import { getAuth, GoogleAuthProvider } from 'firebase/auth';
+import {
+  collection,
+  DocumentSnapshot,
+  getDocs,
+  getFirestore,
+  limit,
+  query,
+  QueryDocumentSnapshot,
+  where,
+} from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
 
 const firebaseConfig: FirebaseOptions = {
   apiKey: 'AIzaSyDdA0izl7IP1I1gIfwwUUTBL9uw8F7R0iI',
@@ -23,19 +32,21 @@ function createFirebaseApp(config) {
 
 const firebaseApp = createFirebaseApp(firebaseConfig);
 
-export const auth = getAuth(firebaseApp)
+export const auth = getAuth(firebaseApp);
 export const googleAuthProvider = new GoogleAuthProvider();
 
 export const firestore = getFirestore(firebaseApp);
 export const storage = getStorage(firebaseApp);
 
-export async function getUserWithUsername(username: string): Promise<QueryDocumentSnapshot<unknown>> {
+export async function getUserWithUsername(
+  username: string
+): Promise<QueryDocumentSnapshot<unknown>> {
   const q = query(
     collection(firestore, 'users'),
     where('username', '==', username),
     limit(1)
   );
-  
+
   return (await getDocs(q)).docs[0];
 }
 
@@ -45,7 +56,7 @@ export function postToJson(doc: DocumentSnapshot) {
     ...data,
     createdAt: data?.createdAt.toMillis() || 0,
     updatedAt: data?.updatedAt.toMillis() || 0,
-  }
+  };
 }
 
 export interface FirestoreUsersDocument {
