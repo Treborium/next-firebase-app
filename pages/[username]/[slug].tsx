@@ -11,6 +11,8 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import Link from 'next/link';
 import { useContext } from 'react';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
+import { AuthCheck } from '../../components/AuthCheck';
+import { HeartButton } from '../../components/HeartButton';
 import { Metatags } from '../../components/Metatags';
 import { PostContent } from '../../components/PostContent';
 import { Post } from '../../components/PostFeed';
@@ -31,7 +33,12 @@ export default function PostPage(props: PostPageProps) {
 
   return (
     <main>
-      <Metatags title={post.title} description={`"${post.title}" written by ${user?.displayName || 'an awesome person'}!`}/>
+      <Metatags
+        title={post.title}
+        description={`"${post.title}" written by ${
+          user?.displayName || 'an awesome person'
+        }!`}
+      />
 
       <section>
         <PostContent post={post} />
@@ -41,6 +48,16 @@ export default function PostPage(props: PostPageProps) {
         <p>
           <strong>{post.heartCount || 0} ❤️</strong>
         </p>
+
+        <AuthCheck
+          fallback={
+            <Link href="/enter" passHref>
+              <button>💗 Sign up</button>
+            </Link>
+          }
+        >
+          <HeartButton postRef={postRef} />
+        </AuthCheck>
 
         {user?.uid == post.uid && (
           <Link href={`/admin/${post.slug}`} passHref>
