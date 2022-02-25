@@ -37,6 +37,7 @@ export const googleAuthProvider = new GoogleAuthProvider();
 
 export const firestore = getFirestore(firebaseApp);
 export const storage = getStorage(firebaseApp);
+export const STATE_CHANGED = 'state_changed';
 
 export async function getUserWithUsername(
   username: string
