@@ -4,6 +4,7 @@ import {
   DocumentReference,
   getFirestore,
   serverTimestamp,
+  Timestamp,
   updateDoc,
 } from 'firebase/firestore';
 import { useRouter } from 'next/router';
@@ -99,7 +100,7 @@ const PostForm: React.FC<PostFormProps> = ({
     const updatedData: Partial<Post> = {
       content,
       published,
-      updatedAt: serverTimestamp(),
+      updatedAt: serverTimestamp() as Timestamp,
     };
 
     await updateDoc(postRef, updatedData);

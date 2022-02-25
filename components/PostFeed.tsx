@@ -1,4 +1,4 @@
-import { FieldValue } from 'firebase/firestore';
+import { Timestamp } from 'firebase/firestore';
 import Link from 'next/link';
 
 export interface Post {
@@ -9,8 +9,8 @@ export interface Post {
   uid: string;
   published: boolean;
   heartCount: number;
-  createdAt: number | FieldValue;
-  updatedAt: number | FieldValue;
+  createdAt: number | Timestamp;
+  updatedAt: number | Timestamp;
 }
 
 interface PostFeedProps {

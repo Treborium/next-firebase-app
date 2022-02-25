@@ -6,6 +6,7 @@ import {
   query,
   serverTimestamp,
   setDoc,
+  Timestamp,
 } from 'firebase/firestore';
 import { useRouter } from 'next/router';
 import { FormEvent, useContext, useState } from 'react';
@@ -69,8 +70,8 @@ const CreateNewPost: React.FC<{}> = () => {
       username,
       published: false,
       content: '# Hello World!',
-      createdAt: serverTimestamp(),
-      updatedAt: serverTimestamp(),
+      createdAt: serverTimestamp() as Timestamp,
+      updatedAt: serverTimestamp() as Timestamp,
       heartCount: 0,
     };
 
